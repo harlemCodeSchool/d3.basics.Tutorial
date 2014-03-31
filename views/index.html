@@ -1,8 +1,11 @@
 
 
 <body>
+
+<div id="header"> <h1> <%= title %> </h1> </div>
+
+
 <div id="text-wrap">
-<h1> <%= title %> </h1>
 <p> I've created this page to help you learn d3, and to make <br/> that happen fast! The first example appends a div element to the body. </p>
 
 <code> d3.select("body").append("div").text("This text made with d3!");
@@ -13,10 +16,37 @@ You should be able to see what we're trying to do here, nothing special, <br/> j
 </div>
 
 <script>
+	// Set the background color
 	function bgColor (color) {
 		document.body.style.background = color;
 	};
-	bgColor("green");
+
+	bgColor("B1E8A9");
+
+	// Style the page up!
+	var header = document.getElementById('header');
+	var hs = header.style;
+	hs.position = ('relative');
+	hs.backgroundColor = ('white');
+	hs.padding = ('1em');
+	hs.width = ('60%');
+	hs.textAlign = ('center');
+	hs.left = ('18%');
+	hs.borderRadius = ('.8em');
+
+	var textWrap = document.getElementById('text-wrap');
+	var tws = textWrap.style;
+	tws.backgroundColor = ('white');
+	tws.position = ('relative');
+	tws.width = ('50%');
+	tws.left = ('25%');
+	tws.textAlign = ('center');
+	tws.borderRadius = ('.8em');
+	tws.top = ('1.7em');
+	tws.padding = ('.7em');
+	tws.paddingBottom = ('2.3em');
+	
+
 </script>
 
 
