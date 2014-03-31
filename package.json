@@ -1,0 +1,19 @@
+{
+    "name": "d3.basics"
+  , "version": "0.0.1"
+  , "private": false
+  , "dependencies": {
+      "express": "3.0"
+    , "less": "*"
+    , "jade": "*"
+    , "jQuery": "*"
+    , "ejs": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ttante/d3.basics"
+  },
+  "engines": {
+    "node": "0.10.15"
+  }
+}
