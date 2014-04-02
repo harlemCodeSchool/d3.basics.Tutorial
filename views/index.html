@@ -8,8 +8,19 @@
 <div id="text-wrap">
 <p> I've created this page to help you learn d3, and to make <br/> that happen fast! The first example appends a div element to the body. </p>
 
-<code> d3.select("body").append("div").text("This text made with d3!");
+<code > d3.select("body").append("div").text("This text made with d3!");
 </code> <br/> <br/>
+
+<p> And here's the code at work!! </p>
+
+<div id="code1">  
+<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.2/d3.js"> </script>
+<script>
+var code1 = d3.select("#code1").append("div").text("This text made with d3!");
+</script>
+
+</div>
+
 
 
 You should be able to see what we're trying to do here, nothing special, <br/> just creating a div element with some text and appending it to the body. 
@@ -23,9 +34,12 @@ You should be able to see what we're trying to do here, nothing special, <br/> j
 
 	bgColor("B1E8A9");
 
-	// Style the page up!
+
+	// Style the page up!	
+		// Header
 	var header = document.getElementById('header');
 	var hs = header.style;
+	
 	hs.position = ('relative');
 	hs.backgroundColor = ('white');
 	hs.padding = ('1em');
@@ -33,9 +47,11 @@ You should be able to see what we're trying to do here, nothing special, <br/> j
 	hs.textAlign = ('center');
 	hs.left = ('18%');
 	hs.borderRadius = ('.8em');
-
+	
+		// Main Content
 	var textWrap = document.getElementById('text-wrap');
 	var tws = textWrap.style;
+	
 	tws.backgroundColor = ('white');
 	tws.position = ('relative');
 	tws.width = ('50%');
