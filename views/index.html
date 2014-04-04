@@ -23,14 +23,72 @@ var code1 = d3.select("#code1").append("div").text("This text made with d3!");
 
 
 
-Hopefully to see what we're trying to do here, nothing special, <br/> just creating a div element with some text and appending it to the body. <br>
+Hopefully to see what we're trying to do here, nothing special, <br/> 
+just creating a div element with some text and appending it to the body. <br>
 
 Now lets do some svg basics. SVG (Scalable Vector Graphics) is a simple and <br>
 powerful graphics generator. Here's how to make a line, square, rectanle, <br>
-circle and elipse. 
+circle and ellipse. <br>
+<br>
+
+
+
+
+
+<svg width="275" height="50">
+  <circle cx="22" cy="22" r="18" fill="green" />
+  <ellipse cx="80" cy="20" rx="27" ry="14" fill="purple" />
+  <rect x="120" y="8" height="28" width="50" fill="blue" />
+  <rect x="190" y="8" height="30" width="30" fill="red" />
+</svg>
+
+<br>
+
+
+<!-- add image of code here! -->
+
+
+
+
+Now let's do the same thing but with d3!
+
+<div id="svgDiv"></div>
+<script>
+	var svgContainer = d3.select("#svgDiv").append("svg")
+											.attr("width", 275)
+											.attr("height", 50)
+
+     var circle = svgContainer.append("circle")
+     						  .attr("cx", 22)
+     						  .attr("cy", 22)
+     						  .attr("r", 18)
+     						  .attr("fill", "green")
+    
+     var myEllipse = svgContainer.append("ellipse")
+     						  .attr("cx", 80)
+     						  .attr("cy", 20)
+     						  .attr("rx", 27)
+     						  .attr("ry", 14)
+     						  .attr("fill", "purple")
+
+     var rect = svgContainer.append("rect")
+     						  .attr("x", 120)
+     						  .attr("y", 8)
+     						  .attr("height", 28)
+     						  .attr("width",  50)
+     						  .attr("fill", "blue")
+
+     var sqr = svgContainer.append("rect")
+     						  .attr("x", 190)
+     						  .attr("y", 8)
+     						  .attr("height", 30)
+     						  .attr("width",  30)
+     						  .attr("fill", "red")
+
+</script
+
 
 </div>
-
 
 
 <script>
