@@ -501,6 +501,65 @@ d3.shuffle(data);
 
 
 </script>
+
+
+<p> Making a donut chart!
+</p>
+<div id="arcChart"></div>
+
+
+
+
+<script>
+
+
+	var data = [10, 40, 90];
+	var r = 250;
+
+	var canvas = d3.select("#arcChart")
+ 			 			.append("svg")
+ 			 			.attr("width", 800)
+ 			 			.attr("height", 800);
+
+ 	var color = d3.scale.ordinal()
+ 				.range(["blue", "red", "green"]);
+
+	var group = canvas.append("g")
+			.attr("transform", "translate(300, 300)");
+
+	var arc = d3.svg.arc()
+			  .innerRadius(150)   // set to 0 to make a full pie chart!!!!
+			  .outerRadius(r);
+	
+
+	var pie = d3.layout.pie()		  
+			  .value(function (d) { return d; });	
+
+	var arcs = group.selectAll(".arc")    
+				.data(pie(data))
+				.enter()
+				.append("g")         // each arc gets is own group!
+				.attr("class", "arc");
+
+	arcs.append("path")
+		.attr("d", arc)
+		.attr("fill", function (d) { return color(d.data); });
+
+
+	arcs.append("text")
+		 .attr("transform", function (d) { return "translate(" + arc.centroid(d) + ")"; })
+		 .attr("text-anchor", "middle")
+		 .attr("font-size", "1.65em")
+		 .text(function (d) { return d.data; });
+
+
+
+
+</script>
+
+
+
+
 </div>
 <script>
 	// Set the background color
