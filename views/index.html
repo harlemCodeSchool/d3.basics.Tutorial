@@ -467,6 +467,40 @@ d3.shuffle(data);
 
 </script>
 
+
+<p> Arcs!!  
+</p>
+<div id="arcs"></div>
+
+
+
+
+<script>
+
+
+	var canvas = d3.select("#arcs")
+ 			 			.append("svg")
+ 			 			.attr("width", 500)
+ 			 			.attr("height", 500);
+
+
+	var group = canvas.append("g")
+			.attr("transform", "translate(110, 110)");
+
+	var r = 100;
+	var p = Math.PI * 2;
+
+ 	var arc = d3.svg.arc()
+ 			.innerRadius(r - 20)
+ 			.outerRadius(r)
+ 			.startAngle(0)
+ 			.endAngle(p - 2.3);
+
+ 	group.append("path")
+ 			.attr("d", arc);
+
+
+</script>
 </div>
 <script>
 	// Set the background color
