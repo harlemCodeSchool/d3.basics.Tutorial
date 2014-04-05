@@ -219,11 +219,13 @@ Let's break down the code a bit. <br>
 
 	var heightScale = d3.scale.linear()
 					  .domain([0, 200])   // set range of min/max of data
-					  .range([0, height]);
+					  .range([height, 0]);
 
 
 	var axis = d3.svg.axis()
-			   .scale(heightScale);
+			   .scale(heightScale)
+			   .orient("left");
+
 
 	var canvas = d3.select("#barChart4")
 					.append("svg")	
@@ -232,10 +234,11 @@ Let's break down the code a bit. <br>
 					// place in a group element
 					.append("g")
 					// move the element
-					.attr("transform", "translate(50, 10)");
+					.attr("transform", "translate(70, 10)");
 	
 	canvas.append("g")
 		.attr("transform", "translate(10, 10)")
+		.attr("class", "axis")
 		.call(axis);
 
 
@@ -253,6 +256,74 @@ Let's break down the code a bit. <br>
 </script>
 
 
+
+
+
+<p> Ok now we've got some basics down, its time to get really rolling.  
+</p>
+
+<!-- DOM elements < data elements (enter), > (exit), = (update) -->
+
+
+
+
+
+
+<div id="barChart5"></div>
+
+
+<script>
+ 	
+	var data = [10, 20];
+
+ 	var canvas = d3.select("#barChart5")
+ 				 .append("svg")
+ 				 .attr("width", 500)
+ 				 .attr("height", 200);
+
+ 	var myCircle = canvas.append("circle")
+ 			 	 .attr("cx", 50)
+ 			 	 .attr("cy", 100)
+ 			 	 .attr("r", 25);
+
+    var myCircles = canvas.selectAll("circle")
+    			 .data(data)
+ 			 	 .enter()   // more dats elements (10, 20), than DOM elemencts ("circle")
+ 			 	 	.append("circle")
+ 			 	 	.attr("fill", "blue")
+ 			 	 	.attr("cx", 50)
+ 			 	 	.attr("cy", 50)
+ 			 	 	.attr("r", 25);
+
+/*
+	The opposite situation: only 1 data item and 2 circles that need filling. 
+	
+
+ 	var data = [10];
+
+ 	var canvas = d3.select("#barChart5")
+ 				 .append("svg")
+ 				 .attr("width", 500)
+ 				 .attr("height", 500);
+
+ 	var myCircle = canvas.append("circle")
+ 			 	 .attr("cx", 50)
+ 			 	 .attr("cy", 100)
+ 			 	 .attr("r", 25);
+
+ 	var myCircle = canvas.append("circle")
+ 			 	 .attr("cx", 50)
+ 			 	 .attr("cy", 100)
+ 			 	 .attr("r", 25);
+
+    var myCircles = canvas.selectAll("circle")
+    			 .data(data)
+ 			 	 .attr("fill", "blue")
+ 			 	 .exit()
+ 			 	 	.attr("fill", "green");
+
+*/
+</script>
 
 
 </div>
@@ -292,6 +363,10 @@ Let's break down the code a bit. <br>
 	tws.top = ('1.7em');
 	tws.padding = ('.7em');
 	tws.paddingBottom = ('2.3em');
+
+	var axisClass = document.getElementByClassName('.axisClass');
+
+
 	
 
 	
