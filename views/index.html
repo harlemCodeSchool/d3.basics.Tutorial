@@ -47,7 +47,7 @@ circle and ellipse. <br>
 
 <br>
 
-<code id="code" style="text-align:left">
+<code id="code1" style="text-align:left">
 
 <p>
 
@@ -269,14 +269,14 @@ Let's break down the code a bit. <br>
 
 
 
-<div id="barChart5"></div>
+<div id="circles1"></div>
 
 
 <script>
  	
 	var data = [10, 20];
 
- 	var canvas = d3.select("#barChart5")
+ 	var canvas = d3.select("#circles1")
  				 .append("svg")
  				 .attr("width", 500)
  				 .attr("height", 200);
@@ -301,7 +301,7 @@ Let's break down the code a bit. <br>
 
  	var data = [10];
 
- 	var canvas = d3.select("#barChart5")
+ 	var canvas = d3.select("#circles1")
  				 .append("svg")
  				 .attr("width", 500)
  				 .attr("height", 500);
@@ -325,6 +325,147 @@ Let's break down the code a bit. <br>
 */
 </script>
 
+
+
+<p> Now for a quick look at transitions. In d3 transitions let you <br>
+	move objects around and even animate them. 
+</p>
+<div id="circles2"></div>
+
+<script>
+
+
+    var canvas = d3.select("#circles2")
+ 				 .append("svg")
+ 				 .attr("width", 500)
+ 				 .attr("height", 500);
+
+ 	var circle = canvas.append("circle")
+ 			 	 .attr("cx", 50)
+ 			 	 .attr("cy", 100)
+ 			 	 .attr("r", 35);
+
+ 	/* circle.transition()
+ 			.duration(1300)
+ 			.delay(200)
+ 			.attr("cx", 180); */
+
+	circle.transition()
+ 			.duration(1300)
+ 			.attr("cx", 250)
+ 			.transition()
+ 			.attr("cy", 300)
+ 			.transition()
+ 			.attr("cx", 100)
+ 			.transition()
+ 			.attr("cy", 100)
+ 			.each("end", function () { d3.select(this).attr("fill", "green"); });
+
+
+
+</script>
+
+
+<p> Now we're going to take a look at how to work with arrays.  
+</p>
+<div id="circles3"></div>
+
+
+
+<script>
+
+
+/*
+in console you can do data.shift(); and you'll get the first element in the data array
+
+d3 has its own special methods
+
+data.sort(d3.descending);    gives you the array in descending order
+d3.min(data);
+d3.max(data);
+d3.sum(data);
+d3.mean(data);
+d3.median(data);
+d3.shuffle(data);
+
+*/
+</script>
+
+<p> Now to get data from other places.  
+</p>
+<div id="circles4"></div>
+
+
+<script>
+
+	var data = [{"name": "Tyler", "age": 26}, {"name": "Mary", "age": 34}, {"name": "Steve", "age": 16}];
+
+
+
+
+		var canvas = d3.select("#circles4")
+ 			 			.append("svg")
+ 			 			.attr("width", 500)
+ 			 			.attr("height", 500);
+
+
+ 		canvas.selectAll("rect")
+ 				.data(data)
+ 				.enter()
+ 					.append("rect")
+ 					.attr("width", function (d) { return d.age * 10; })
+ 					.attr("height", 47)
+ 					.attr("y", function (d, i) { return i * 50; })
+ 					.attr("fill", "blue");
+
+ 		canvas.selectAll("text")
+ 				.data(data)
+ 				.enter()
+ 					.append("text")
+ 					.attr("fill", "white")
+ 					.attr("y", function (d, i) { return i * 50 + 24; })
+ 					.text(function (d) { return d.name;});
+
+
+
+
+</script>
+
+<p> Paths allow you to make anything!!  
+</p>
+<div id="paths1"></div>
+
+
+
+
+<script>
+
+	var data = [{x: 10, y: 22}, {x: 35, y: 60}, {x: 50, y: 76}];
+
+	var canvas = d3.select("#paths1")
+ 			 			.append("svg")
+ 			 			.attr("width", 500)
+ 			 			.attr("height", 500);
+
+
+	var group = canvas.append("g")
+			.attr("transform", "translate(90, 90)");
+
+	var line = d3.svg.line()
+			.x(function (d) { return d.x; })
+			.y(function (d) { return d.y; });
+
+	group.selectAll("path")
+			.data([data])
+			.enter()
+			.append("path")
+			.attr("d", line)
+			.attr("fill", "none")
+			.attr("stroke", "#000")
+			.attr("stroke-width", 10);
+
+
+</script>
 
 </div>
 <script>

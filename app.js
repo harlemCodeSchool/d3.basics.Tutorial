@@ -13,8 +13,9 @@ app.configure(function(){
     app.use(express.methodOverride());
     //app.use(express.compiler({ src : __dirname + '/public', enable: ['less']}));
     app.use(app.router);
-    app.use(express.static(__dirname + "/public"));
-    app.use('/public', express.static(__dirname + "/public"));
+    app.use(express.static(__dirname + '/public'));
+    app.use('/public', express.static(__dirname + '/public'));
+    app.use('/data',  express.static(__dirname + '/data'));
 
 });
 
