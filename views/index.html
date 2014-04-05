@@ -558,8 +558,409 @@ d3.shuffle(data);
 </script>
 
 
+<p> Using diagonals (fancy lines):
+</p>
+<div id="diagonal1"></div>
 
 
+
+
+<script>
+
+
+	var canvas = d3.select("#diagonal1")
+ 			 			.append("svg")
+ 			 			.attr("width", 800)
+ 			 			.attr("height", 800);
+
+
+ 	var diagonal = d3.svg.diagonal()
+ 				.source({x:10, y:15})
+ 				.target({x: 450, y: 200});
+
+
+	 	canvas.append("path")
+ 				.attr("fill", "none")
+ 				.attr("stroke", "black")
+ 				.attr("d", diagonal);
+
+
+
+</script>
+
+
+
+<p> Making a data tree!! This is reall a combination: <br>
+	of diagonals and rectangles, thought the rectangles could be <br>
+	any shape. 
+</p>
+<div id="tree1"></div>
+
+
+
+
+<script>
+
+
+	var data = {"name": "Rojo",
+					 "children": [
+					 {
+					 	"name": "Elvis",
+					 	"children": [
+						 {"name": "Beats"},
+						 {"name": "Idol"},
+						 {"name": "Bruce"},
+						]
+					  },
+					 {
+					 	"name": "Wolf/Waters",
+					 	"children": [
+					 	{"name": "Stones", "size": 5},
+					 	{"name": "Zeppelin", "size": 4}
+
+					 	]
+					 }
+				   ]
+				};
+
+
+	var canvas = d3.select("#tree1")
+ 			 			.append("svg")
+ 			 			.attr("width", 600)
+ 			 			.attr("height", 600)
+ 			 			.append("g")
+ 			 				.attr("transform", "translate(50, 40)");
+
+ 	var tree = d3.layout.tree()
+ 				.size([450, 450]);
+
+ 	var nodes = tree.nodes(data);
+ 		
+ 	var links = tree.links(nodes);
+
+ 	var node = canvas.selectAll(".node")
+ 				.data(nodes)
+ 				.enter()
+ 				.append("g")
+ 					.attr("class", "node")
+ 					// lay rectangles out acording to the location!
+ 					.attr("transform", function (d) { return "translate(" + (d.x -7) + "," + d.y + ")"; });
+
+ 	node.append("rect")
+ 			  .attr("height", 14)
+     		  .attr("width",  14)
+     		  .attr("x", 0)
+     		  .attr("fill", "steelblue");
+
+    node.append("text")
+     			.text(function (d) {return d.name; })
+     			.attr("x", 15)
+     			.attr("y", 12);
+
+    var diagonal = d3.svg.diagonal();
+
+    
+    canvas.selectAll(".link")
+    		.data(links)
+    		.enter()
+    		.append("path")
+    		.attr("class", "link")
+    		.attr("fill", "none")
+    		.attr("stroke", "#ADADDD")
+    		.attr("d", diagonal);
+
+     canvas.selectAll("")
+
+
+ 	//	console.log(links);
+
+
+
+</script>
+
+
+
+<p> Now to make one horizontally! <br>
+	
+</p>
+<div id="tree2"></div>
+
+
+
+
+<script>
+
+
+// to rotate to horizonal! 
+// Step 1 flip d.x and d.y in the 'node' variable
+// Step 2 add .projection to the var diagonal!
+
+
+	var data = {"name": "Rojo",
+					 "children": [
+					 {
+					 	"name": "Elvis",
+					 	"children": [
+						 {"name": "Beats"},
+						 {"name": "Idol"},
+						 {"name": "Bruce"},
+						]
+					  },
+					 {
+					 	"name": "Wolf/Waters",
+					 	"children": [
+					 	{"name": "Stones", "size": 5},
+					 	{"name": "Zeppelin", "size": 4}
+
+					 	]
+					 }
+				   ]
+				};
+
+
+	var canvas = d3.select("#tree2")
+ 			 			.append("svg")
+ 			 			.attr("width", 600)
+ 			 			.attr("height", 600)
+ 			 			.append("g")
+ 			 				.attr("transform", "translate(50, 40)");
+
+ 	var tree = d3.layout.tree()
+ 				.size([450, 450]);
+
+ 	var nodes = tree.nodes(data);
+ 		
+ 	var links = tree.links(nodes);
+
+ 	var node = canvas.selectAll(".node")
+ 				.data(nodes)
+ 				.enter()
+ 				.append("g")
+ 					.attr("class", "node")
+ 					// lay rectangles out acording to the location!
+ 					.attr("transform", function (d) { return "translate(" + (d.y - 5) + "," + (d.x - 7) + ")"; });
+
+ 	node.append("rect")
+ 			  .attr("height", 14)
+     		  .attr("width",  14)
+     		  .attr("fill", "steelblue");
+
+    node.append("text")
+     			.text(function (d) {return d.name; });
+
+    var diagonal = d3.svg.diagonal()
+ 				.projection(function (d) { return [d.y, d.x]; });
+
+
+ //     default value  .projection(function (d) { return [d.x, d.y]; });
+
+    
+    canvas.selectAll(".link")
+    		.data(links)
+    		.enter()
+    		.append("path")
+    		.attr("class", "link")
+    		.attr("fill", "none")
+    		.attr("stroke", "#ADADDD")
+    		.attr("d", diagonal);
+
+     canvas.selectAll("")
+
+
+ 	//	console.log(links);
+
+
+
+</script>
+
+
+
+<p> Cluster layout time. They are almost identical except <br>
+	when you have a high branch with no children, the cluster  <br>
+	branch brings that high branch to the bottom  <br>
+</p>
+<div id="tree2"></div>
+
+
+
+
+<script>
+
+
+// to rotate to horizonal! 
+// Step 1 flip d.x and d.y in the 'node' variable
+// Step 2 add .projection to the var diagonal!
+
+
+	var data = {"name": "Rojo",
+					 "children": [
+					 {
+					 	"name": "Elvis",
+					 	"children": [
+						 {"name": "Beats"},
+						 {"name": "Idol"},
+						 {"name": "Bruce"},
+						]
+					  },
+					 {
+					 	"name": "Wolf/Waters",
+					 	"children": [
+					 	{"name": "Stones", "size": 5},
+					 	{"name": "Zeppelin", "size": 4}
+
+					 	]
+					 }
+				   ], 
+				  "name": "Jimi"
+
+				};
+
+
+	var canvas = d3.select("#tree2")
+ 			 			.append("svg")
+ 			 			.attr("width", 600)
+ 			 			.attr("height", 600)
+ 			 			.append("g")
+ 			 				.attr("transform", "translate(50, 40)");
+
+ 	var tree = d3.layout.tree()
+ 				.size([450, 450]);
+
+ 	var nodes = tree.nodes(data);
+ 		
+ 	var links = tree.links(nodes);
+
+ 	var node = canvas.selectAll(".node")
+ 				.data(nodes)
+ 				.enter()
+ 				.append("g")
+ 					.attr("class", "node")
+ 					// lay rectangles out acording to the location!
+ 					.attr("transform", function (d) { return "translate(" + (d.y - 5) + "," + (d.x - 7) + ")"; });
+
+ 	node.append("rect")
+ 			  .attr("height", 14)
+     		  .attr("width",  14)
+     		  .attr("fill", "steelblue");
+
+    node.append("text")
+     			.text(function (d) {return d.name; });
+
+    var diagonal = d3.svg.diagonal()
+ 				.projection(function (d) { return [d.y, d.x]; });
+
+
+    
+    canvas.selectAll(".link")
+    		.data(links)
+    		.enter()
+    		.append("path")
+    		.attr("class", "link")
+    		.attr("fill", "none")
+    		.attr("stroke", "#ADADDD")
+    		.attr("d", diagonal);
+
+     canvas.selectAll("")
+
+
+
+
+
+</script>
+
+
+<p> Here's the same thing only smaller before we change it <br>
+	to a cluster style. <br>
+<div id="tree3"></div>
+
+<script>
+
+
+// to rotate to horizonal! 
+// Step 1 flip d.x and d.y in the 'node' variable
+// Step 2 add .projection to the var diagonal!
+
+
+	var data = {
+				"name": "Rojo",
+				"value": "36",
+				"children": [
+				{
+					"name": "Elvis",
+					"value": 54,
+					"children": [
+					    {"name": "Beats"},
+						{"name": "Idol"},
+						{"name": "Bruce"},
+					   ]
+				},
+			    {
+					 	"name": "Wolf/Waters",
+					 	"children": [
+					 	{"name": "Stones", "size": 5},
+					 	{"name": "Zeppelin", "size": 4}
+					   ]
+				},
+				{
+					"name": "Jimi",
+					"value": 67
+				 }
+			   ] 
+			  };
+
+
+	var canvas = d3.select("#tree3")
+ 			 			.append("svg")
+ 			 			.attr("width", 600)
+ 			 			.attr("height", 500)
+ 			 			.append("g")
+ 			 				.attr("transform", "translate(50, 40)");
+
+ 	var tree = d3.layout.tree()
+ 				.size([200, 250]);
+
+ 	var nodes = tree.nodes(data);
+ 		
+ 	var links = tree.links(nodes);
+
+ 	var node = canvas.selectAll(".node")
+ 				.data(nodes)
+ 				.enter()
+ 				.append("g")
+ 					.attr("class", "node")
+ 					// lay rectangles out acording to the location!
+ 					.attr("transform", function (d) { return "translate(" + d.y + "," + (d.x) + ")"; });
+
+ 	node.append("circle")
+ 			  .attr("r", 6)
+     		  .attr("fill", "red");
+
+    node.append("text")
+     			.text(function (d) {return d.name; });
+
+    var diagonal = d3.svg.diagonal()
+ 				.projection(function (d) { return [d.y, d.x]; });
+
+
+    
+    canvas.selectAll(".link")
+    		.data(links)
+    		.enter()
+    		.append("path")
+    		.attr("class", "link")
+    		.attr("fill", "none")
+    		.attr("stroke", "#ADADDD")
+    		.attr("d", diagonal);
+
+
+
+
+
+
+
+</script>
+
+<div id="tree4"></div>
 </div>
 <script>
 	// Set the background color
