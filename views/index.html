@@ -960,8 +960,231 @@ d3.shuffle(data);
 
 </script>
 
+<p> And here's the cluster!<br>
+	 <br>
 <div id="tree4"></div>
+
+<script>
+
+
+// to rotate to horizonal! 
+// Step 1 flip d.x and d.y in the 'node' variable
+// Step 2 add .projection to the var diagonal!
+
+
+	var data = {
+				"name": "Rojo",
+				"value": "36",
+				"children": [
+				{
+					"name": "Elvis",
+					"value": 54,
+					"children": [
+					    {"name": "Beats"},
+						{"name": "Idol"},
+						{"name": "Bruce"},
+					   ]
+				},
+			    {
+					 	"name": "Wolf/Waters",
+					 	"children": [
+					 	{"name": "Stones", "size": 5},
+					 	{"name": "Zeppelin", "size": 4}
+					   ]
+				},
+				{
+					"name": "Jimi",
+					"value": 67
+				 }
+			   ] 
+			  };
+
+
+	var canvas = d3.select("#tree4")
+ 			 			.append("svg")
+ 			 			.attr("width", 600)
+ 			 			.attr("height", 500)
+ 			 			.append("g")
+ 			 				.attr("transform", "translate(50, 40)");
+
+ 	var tree = d3.layout.cluster()
+ 				.size([200, 250]);
+
+ 	var nodes = tree.nodes(data);
+ 		
+ 	var links = tree.links(nodes);
+
+ 	var node = canvas.selectAll(".node")
+ 				.data(nodes)
+ 				.enter()
+ 				.append("g")
+ 					.attr("class", "node")
+ 					// lay rectangles out acording to the location!
+ 					.attr("transform", function (d) { return "translate(" + d.y + "," + (d.x) + ")"; });
+
+ 	node.append("circle")
+ 			  .attr("r", 6)
+     		  .attr("fill", "red");
+
+    node.append("text")
+     			.text(function (d) {return d.name; });
+
+    var diagonal = d3.svg.diagonal()
+ 				.projection(function (d) { return [d.y, d.x]; });
+
+
+    
+    canvas.selectAll(".link")
+    		.data(links)
+    		.enter()
+    		.append("path")
+    		.attr("class", "link")
+    		.attr("fill", "none")
+    		.attr("stroke", "#ADADDD")
+    		.attr("d", diagonal);
+
+
+
+
+
+
+
+</script>
+
+<p> Now for the pack layout</p> <br>
+
+<div id="cluster"></div>
+
+
+
+<script>
+
+		var data = {
+				"name": "Rojo",
+				"value": 100,
+				"children": [
+				{
+					"name": "Elvis",
+					"value": 85,
+					"children": [
+					    {"name": "Beats", "value": 75},
+						{"name": "Idol", "value": 67},
+						{"name": "Bruce", "value": 78}
+					   ]
+				},
+			    {
+					 	"name": "Wolf/Waters",
+					 	"children": [
+					 	{"name": "Stones", "value": 75},
+					 	{"name": "Zeppelin", "value": 84}
+					   ]
+				},
+				{
+					"name": "Jimi",
+					"value": 87
+				 }
+			   ] 
+			  };
+
+	
+	var width = 800;
+	var height = 600;
+
+
+	var canvas = d3.select("#cluster")
+ 			 			.append("svg")
+ 			 			.attr("width", width)
+ 			 			.attr("height", height)
+ 			 			.append("g")
+ 			 				.attr("transform", "translate(50, 40)");
+
+ 	var pack = d3.layout.pack()
+ 			.size([width, height - 60])
+ 			.padding(10);
+
+ 	var nodes = pack.nodes(data);
+
+    var node = canvas.selectAll(".node")
+    		.data(nodes)
+    		.enter()
+    		.append("g")
+    		.attr("class", "node")
+    		.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+    node.append("circle")
+    	.attr("r", function (d) { return d.r; }) 
+    	.attr("fill", "red")
+    	.attr("opacity", .3)
+    	.attr("stroke", "#ADADAG")
+    	.attr("stroke-width", "2");
+
+    node.append("text")
+    	.text(function (d) { return d.name; });
+    //  show only if they don't have children	.text(function (d) { return d.children ? "" : d.name; });
+
+</script>
+
+
+<p> Bubble layout</p> <br>
+
+<div id="bubble"> </div>
+
+
+
+
+<script>
+
+		var data = {
+				"name": "Rojo",
+				"value": 100,
+				"children": [	
+					    {"name": "Beats", "value": 25},
+						{"name": "Idol", "value": 67},
+						{"name": "Bruce", "value": 78},
+					 	{"name": "Stones", "value": 5},
+					 	{"name": "Zeppelin", "value": 84},
+					 	{"name": "Jimi", "value": 17}
+			   ] 
+			  };
+
+	
+	var width = 800;
+	var height = 600;
+
+
+	var canvas = d3.select("#bubble")
+ 			 			.append("svg")
+ 			 			.attr("width", width)
+ 			 			.attr("height", height)
+ 			 			.append("g")
+ 			 				.attr("transform", "translate(50, 40)");
+
+ 	var pack = d3.layout.pack()
+ 			.size([width, height - 60])
+ 			.padding(10);
+
+ 	var nodes = pack.nodes(data);
+
+    var node = canvas.selectAll(".node")
+    		.data(nodes)
+    		.enter()
+    		.append("g")
+    		.attr("class", "node")
+    		.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+    node.append("circle")
+    	.attr("r", function (d) { return d.r; }) 
+    	.attr("fill", function (d) { return d.children ? "white" : "red"; })
+    	.attr("opacity", .3)
+    	.attr("stroke", function (d) { return d.children ? "white" : "red";})
+    	.attr("stroke-width", "2");
+
+    node.append("text")
+			.text(function (d) { return d.children ? "" : d.name; });
+
+</script>
 </div>
+
 <script>
 	// Set the background color
 	function bgColor (color) {
