@@ -2,7 +2,20 @@
 
 <body>
 
-<div id="header"> <h1> <%= title %> </h1> </div>
+	<div id="header"> <h1> <%= title %> </h1> 
+	</div>
+
+<!-- 
+	<div id="menuBar"> 
+		<ul>
+			<li> Home </li>
+			<li> More Tutorials</li>
+			<li> This Code @ Github</li>
+			<li> About </li>	
+		</ul>
+	</div>	
+
+-->
 
 
 	<div id="text-wrap" style="text-size:19px">
@@ -1227,7 +1240,9 @@ d3.shuffle(data);
 		document.body.style.background = color;
 	};
 
-	bgColor("#5AB3BF");
+	bgColor("#3888C6");
+
+	var menuBar = document.getElementById('header');
 
 
 	// Style the page up!	
@@ -1243,14 +1258,25 @@ d3.shuffle(data);
 	hs.left = ('18%');
 	hs.borderRadius = ('.8em');
 	
+
+/*	var menuBar = document.getElementById('menuBar');
+    var mbs = menuBar.style;
+
+	mbs.backgroundColor = ('white');
+	mbs.position = ('relative');
+	mbs.maxHeight = ('30px');
+	mbs.width = ('60%');
+	mbs.left = ('15%');
+	mbs.float = ('left'); */
+
 		// Main Content
 	var textWrap = document.getElementById('text-wrap');
 	var tws = textWrap.style;
 	
 	tws.backgroundColor = ('white');
 	tws.position = ('relative');
-	tws.width = ('75%');
-	tws.left = ('12.5%');
+	tws.width = ('82.5%');
+	tws.left = ('7.5%');
 	tws.textAlign = ('center');
 	// tws.fontFamily('helvetica');
 	tws.borderRadius = ('10px');
@@ -1268,7 +1294,7 @@ d3.shuffle(data);
 </script>
 
 
-
+<style type="text/css"> #menuBar li { float: left; width: 25%; } </style>
 
 
 </body>
