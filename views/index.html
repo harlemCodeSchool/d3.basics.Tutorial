@@ -20,8 +20,7 @@
 
 	<div id="text-wrap" style="text-size:19px">
 	
-	<p> I've created this page to help you learn d3, and to make <br> 
-		that happen fast! The first example appends a div element to the body. 
+	<p> I've created this page to help you learn d3, and to make that happen fast! The first example appends a div element to the body. 
 	</p>
 
 	<code > d3.select("body").append("div").text("This text made with d3!");
@@ -30,8 +29,9 @@
 	<br>
 	<br>
 
-	<p> And here's the code at work!! </p>
+	<p> And here's the code at work: </p>
 
+	<br>
 	<div id="code1">  
 		
 		<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.2/d3.js"> 
@@ -46,30 +46,31 @@
 			c1s.backgroundColor('steelblue');
 
 		</script>
-
+	<br>
 	</div>
 
 
 	<br>
-	Here's the code used: 
+	Here's the code it took to make that. In this case we're basically using d3 <br>
+	like JQuery, but  
 	<pre>
 
 var code1 = d3.select("#code1").append("div").text("This text made with d3!");
 
 	</pre>
 
-	Hopefully to see what we're trying to do here, nothing special, <br/> 
-	just creating a div element with some text and appending it to the body. <br>
+	Hopefully to see what we're trying to do here, nothing special,
+	just creating a div element <br> with some text and appending it to the body. 
 
-	Now lets do some svg basics. SVG (Scalable Vector Graphics) is a simple and <br>
-	powerful graphics generator. Here's how to make a line, square, rectanle, <br>
+	Now lets do some svg basics. SVG (Scalable Vector Graphics) is a <br>simple and 
+	powerful graphics generator. Here's how to make a line, square, rectanle, 
 	circle and ellipse. <br>
 	<br>
 
 
 
 
-
+  <code id="code2" style="text-align:left">
 
 	<svg width="275" height="50">
 	  <circle cx="22" cy="22" r="18" fill="green" />
@@ -82,7 +83,7 @@ var code1 = d3.select("#code1").append("div").text("This text made with d3!");
 
 	<br>
 
-	<code id="code1" style="text-align:left">
+	
 
 	<p>
 
@@ -98,25 +99,58 @@ var code1 = d3.select("#code1").append("div").text("This text made with d3!");
 
 	
 
+
+
+	</code>
+
+
+
+	Now let's do the same thing but with d3! Here's the code first:
+
+	
+	<br>
+
+	<code>
 		<pre>
+   var svgContainer = d3.select("#svgDiv").append("svg")
+           				.attr("width", 275)
+   					.attr("height", 50)
 
-			<svg width="275" height="50">
-			  <circle cx="22" cy="22" r="18" fill="green" />
-			  <ellipse cx="80" cy="20" rx="27" ry="14" fill="purple" />
-			  <rect x="120" y="8" height="28" width="50" fill="blue" />
-			  <rect x="190" y="8" height="30" width="30" fill="red" />
-			</svg>
+    var circle = svgContainer.append("circle")
+					  .attr("cx", 22)
+	     				  .attr("cy", 22)
+	     				  .attr("r", 18)
+	     				  .attr("fill", "green")
+	    
+    var myEllipse = svgContainer.append("ellipse")
+	   				  .attr("cx", 80)
+	     				  .attr("cy", 20)
+	     				  .attr("rx", 27)
+	     				  .attr("ry", 14)
+	  				  .attr("fill", "purple")
 
+    var rect = svgContainer.append("rect")
+	     				  .attr("x", 120)
+	     				  .attr("y", 8)
+	     				  .attr("height", 28)
+	     				  .attr("width",  50)
+	     				  .attr("fill", "blue")
 
-		</pre>
+    var sqr = svgContainer.append("rect")
+   					  .attr("x", 190)
+     					  .attr("y", 8)
+     					  .attr("height", 30)
+     					  .attr("width",  30)
+    					  .attr("fill", "red")
+	    </pre>
+	</code>
 
-</code>
+	And here's the result. <br>
+	<div id="svgDiv"></div>
+	<br><br>
+	<hr>
+	<br><br>
 
-
-
-Now let's do the same thing but with d3!
-
-<div id="svgDiv"></div>
 <script>
 	var svgContainer = d3.select("#svgDiv").append("svg")
 											.attr("width", 275)
@@ -151,21 +185,21 @@ Now let's do the same thing but with d3!
 
 </script>
 
-	Now that we've got the basics of SVG's down, we can see where<br>
-	d3 gets really powerful, which is making shapes using data! <br>
-
+	Now that we've got the basics of SVG's down, we can see where
+	d3 gets really powerful, which is <br>making shapes using data! 
 	To do this, we have to have some data: in the real worl you <br>
-	may be getting data from any number of sources, but to star <br>
-	we're going to make ourselves an array to begin with. <br>
-	Lets start with an array of my golf scores. We can <br>
-	do this: var scores = [78, 86, 93, 78, 99, 82, 75, 83, 80] <br>
-	No we'll turn this into a bar chart! <br>
+	may be getting data from any number of sources, but to star 
+	we're going to make ourselves <br> an array to begin with. 
+	Lets start with an array of my golf scores. We can 
+	do this: <br> var scores = [78, 86, 93, 78, 99, 82, 75, 83, 80] <br><br>
+	Now we'll turn this into a bar chart! 
+	<br><br><br>
 
 	<div id="barChart"></div>
 <script>
 	var scores = [78, 86, 93, 78, 99, 82, 75, 83, 80]; 
 	var width = 600;
-	var height = 300;
+	var height = 180;
 
 	var canvas = d3.select("#barChart")
 					.append("svg")	
@@ -182,7 +216,7 @@ Now let's do the same thing but with d3!
 					 		.attr("fill", "green");
 </script>
 <br>
-Now we're rolling! It's upside down, but we'll get to that in a bit.<br>
+Now we're rolling! It's upside down, but we'll get to that in a bit.
 Let's break down the code a bit. <br>
 
 <br>
@@ -1275,19 +1309,31 @@ d3.shuffle(data);
 	
 	tws.backgroundColor = ('white');
 	tws.position = ('relative');
-	tws.width = ('82.5%');
+	tws.width = ('72.5%');
+	tws.maxWidth = ('80%');
 	tws.left = ('7.5%');
-	tws.textAlign = ('center');
 	// tws.fontFamily('helvetica');
 	tws.borderRadius = ('10px');
 	tws.top = ('1.7em');
 	tws.marginTop = ('20px');
 	tws.padding = ('.7em');
-	tws.paddingTop = ('20px');
-	tws.paddingBottom = ('2.3em');
+	tws.paddingTop = ('3%');
+	tws.paddingBottom = ('1.5%');
+	tws.paddingLeft = ('8.5%');
+	tws.paddingRight = ('5%');
 
+	var code2 = document.getElementById('code2');
+	var c2s = code2.style;
 
+	c2s.left = ('12%');
+	c2s.position = ('relative');
+
+	var svg = document.getElementById('svgDiv');
+	var svs = svg.style;
+
+	svs.paddingLeft = ('12%');
 	
+
 
 	
 
