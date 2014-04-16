@@ -155,6 +155,25 @@ var code1 = d3.select("#code1").append("div").text("This text made with d3!");
 	And here's the result. <br>
 	<div id="svgDiv"></div>
 	<br><br>
+	<div class="textLesson">
+		Let's break the code down. First we use 'd3.select' to select the div with id(#) "svgDiv". 
+		<br> Then we append an "svg" type graphic to it and give that graphic a space with a <br>
+			widt of 275 and heigh of 50 to work with. The '.attr', or attribute method can be used
+			<br> add style to elements while '.append' normally just appends physical elements 
+			themselves. <br> These are easy to confuse at first, but don't worry, you 
+			will get used to it soon!
+
+			<code>
+				<pre>
+	   var svgContainer = d3.select("#svgDiv").append("svg")
+	           				.attr("width", 275)
+	   					.attr("height", 50)
+	   			</pre>
+	   		</code>
+
+
+
+	</div>	
 	<hr>
 	<br><br>
 
